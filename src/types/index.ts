@@ -1,11 +1,8 @@
 export interface DashboardMetrics {
-  totalBalance: number;
-  revenueYTD: number;
-  expensesYTD: number;
-  activeSubscriptions: number;
-  revenueChange: number;
-  expensesChange: number;
-  balanceChange: number;
+  totalRevenue: number;
+  activeUsers: number;
+  transactions: number;
+  growth: number;
 }
 
 export interface MonthlyData {
@@ -15,13 +12,9 @@ export interface MonthlyData {
 }
 
 export interface Transaction {
-  _id?: string;
-  userId?: string;
-  title: string;
-  amount: string | number;
-  type?: string;
-  category?: string;
-  date: Date | string;
+  id: string;
+  customer: string;
+  amount: string | number;   // ← now accepts both strings and numbers
   status: string;
-  source?: string;
+  date: string;
 }

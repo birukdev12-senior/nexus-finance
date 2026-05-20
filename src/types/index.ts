@@ -15,13 +15,13 @@ export interface MonthlyData {
 }
 
 export interface Transaction {
-  _id: string;
-  userId: string;
+  _id?: string;
+  userId?: string;
   title: string;
-  amount: number;
-  type: string;
-  category: string;
+  amount: string | number;
+  type?: string;
+  category?: string;
   date: Date | string;
   status: string;
-  source: string;
+  source?: string;
 }

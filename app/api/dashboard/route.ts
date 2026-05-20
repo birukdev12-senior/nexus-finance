@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { dbConnect } from "@/lib/mongodb";
+import { connectDB } from "@/lib/mongodb";
 import { getStripeBalance } from "@/lib/stripe";
 import Transaction from "@/models/Transaction";
 import { requireAuth } from "@/lib/auth";
@@ -7,7 +7,7 @@ import { requireAuth } from "@/lib/auth";
 export async function GET() {
   try {
     const session = await requireAuth();
-    await dbConnect();
+    await connectDB();
 
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);

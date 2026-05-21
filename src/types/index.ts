@@ -32,14 +32,14 @@ export interface Transaction {
   title?: string;
   amount?: string;
   type?: string;
-  category?: string;
-  date?: string;
+  category: string;
+  date: string;
   status?: string;
   source?: string;
 }
 
 export interface StripeBalance {
-  available?: number;
-  pending?: number;
+  available: number;
+  pending: number;
   currency?: string;
 }

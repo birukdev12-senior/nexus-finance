@@ -22,7 +22,7 @@ export default function TransactionRow({ tx }: { tx: Transaction }) {
       </div>
       <div className="text-right">
         <p className={clsx("text-sm font-semibold", tx.type === "credit" ? "text-green-700" : "text-gray-900 dark:text-white")}>
-          {tx.type === "credit" ? "+" : "−"}${Math.abs(tx.amount).toLocaleString()}
+          {tx.type === "credit" ? "+" : "−"}${Math.abs(Number(tx.amount)).toLocaleString()}
         </p>
         <span className={clsx("text-xs px-1.5 py-0.5 rounded-full",
           tx.status === "completed" ? "bg-green-50 text-green-700" :

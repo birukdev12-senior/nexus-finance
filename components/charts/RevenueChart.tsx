@@ -1,84 +1,90 @@
 "use client";
-import { Bar, Line } from "react-chartjs-2";
+
+import React from "react";
 import {
-  Chart as ChartJS, CategoryScale, LinearScale, BarElement,
-  LineElement, PointElement, Filler, Tooltip, Legend,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
 } from "chart.js";
-import type { MonthlyData } from "@/types";
+import { Bar } from "react-chartjs-2";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Filler, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface Props { data: MonthlyData[]; }
+interface MonthlyData {
+  month: string;
+  revenue: number;
+  expenses?: number;
+  costs?: number;
+  profit?: number;
+}
 
-export default function RevenueChart({ data }: Props) {
-  const labels   = data.map(d => d.month);
-  const revenue  = data.map(d => d.revenue);
-  const expenses = data.map(d => d.expenses);
-  const profit   = data.map(d => d.profit);
+export default function RevenueChart({ data }: { data: MonthlyData[] }) {
+  const labels = data.map((d) => d.month);
+  const revenue = data.map((d) => d.revenue);
+  const expenses = data.map((d) => d.expenses ?? 0);
+  const profit = data.map((d) => d.profit ?? 0);
 
-  const chartData = {
+  const chartData: any = {
     labels,
     datasets: [
       {
-        type: "bar" as const,
+        type: "bar",
         label: "Revenue",
         data: revenue,
-        backgroundColor: "#185FA5",
+        backgroundColor: "#4F46E5",
         borderRadius: 4,
         borderSkipped: false,
       },
       {
-        type: "bar" as const,
+        type: "bar",
         label: "Expenses",
         data: expenses,
-        backgroundColor: "#E24B4A",
+        backgroundColor: "#EF4444",
         borderRadius: 4,
         borderSkipped: false,
       },
       {
-        type: "line" as const,
-        label: "Net Profit",
+        type: "line",
+        label: "Profit",
         data: profit,
-        borderColor: "#639922",
-        backgroundColor: "rgba(99,153,34,0.08)",
-        borderWidth: 2,
-        pointRadius: 3,
-        pointBackgroundColor: "#639922",
-        tension: 0.4,
+        borderColor: "#10B981",
+        backgroundColor: "rgba(16,185,129,0.2)",
         fill: true,
+        tension: 0.4,
+        pointRadius: 4,
       },
     ],
   };
 
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: { callback: (value: any) => `$${value}` },
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (ctx: any) => {
+            const value = ctx.parsed.y;
+            if (value === null || value === undefined) return "";
+            return `$${value}`;
+          },
+        },
+      },
+    },
+  };
+
   return (
-    <div className="relative h-56">
-      <Bar
-        data={chartData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: ctx => ` $${ctx.parsed.y.toLocaleString()}`,
-              },
-            },
-          },
-          scales: {
-            x: { grid: { display: false }, ticks: { font: { size: 11 }, color: "#888780" } },
-            y: {
-              grid: { color: "rgba(0,0,0,0.04)" },
-              border: { display: false },
-              ticks: {
-                font: { size: 11 },
-                color: "#888780",
-                callback: v => `$${(Number(v) / 1000).toFixed(0)}k`,
-              },
-            },
-          },
-        }}
-      />
+    <div className="h-96 w-full">
+      <Bar data={chartData} options={options} />
     </div>
   );
 }

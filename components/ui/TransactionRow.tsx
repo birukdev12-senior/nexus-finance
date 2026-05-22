@@ -9,7 +9,7 @@ const categoryColors: Record<string, string> = {
   Marketing: "bg-green-50 text-green-700",
 };
 
-export default function TransactionRow({ resolvedTx = { category: "Uncategorized", description: "", amount: 0, date: new Date().toISOString() } }: { resolvedTx?: Transaction }) {
+export default function TransactionRow({ resolvedTx = { category: "General", description: "", amount: 0, date: new Date().toISOString() } }: { resolvedTx?: Transaction }) {
   const color = categoryColors[(resolvedTx?.category ?? "Uncategorized")] ?? "bg-gray-50 text-gray-600";
   return (
     <div className="flex items-center gap-3 py-3 border-b border-gray-50 dark:border-gray-800 last:border-0">

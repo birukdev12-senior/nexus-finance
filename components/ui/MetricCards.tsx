@@ -6,7 +6,7 @@ interface Props {
   metrics: DashboardMetrics;
 }
 
-export default function MetricCards({ metrics }: Props) {
+export default function MetricCards({ metrics = { totalBalance: 0, revenueYTD: 0, expensesYTD: 0, activeSubscriptions: 0 } }: Props) {
   const cards = [
     { label: "Total Balance", value: `$${metrics.totalBalance.toLocaleString()}` },
     { label: "Revenue YTD", value: `$${metrics.revenueYTD.toLocaleString()}` },

@@ -30,7 +30,7 @@ export default function DashboardContent() {
       <div className="mt-6">
         <h2 className="text-xl font-semibold mb-4">Recent Transactions</h2>
         {MOCK_TRANSACTIONS.map((txn) => (
-          <TransactionRow key={txn.id} transaction={txn} />
+          <TransactionRow key={txn.id} tx={txn} />
         ))}
       </div>
     </div>

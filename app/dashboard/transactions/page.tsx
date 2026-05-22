@@ -31,7 +31,7 @@ export default function TransactionsPage() {
         ))}
       </div>
       <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-5">
-        {filtered.map(tx => <TransactionRow key={tx._id} transaction={tx} />)}
+        {filtered.map(tx => <TransactionRow key={tx._id} tx={tx} />)}
       </div>
     </div>
   );

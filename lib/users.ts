@@ -18,6 +18,12 @@ const hardcodedUsers: User[] = [
     password: "password123",
     name: "Dr. Jane Smith",
   },
+  {
+    id: "3",
+    email: "admin@nexus.com",
+    password: "password123",
+    name: "Nexus Admin",
+  },
 ];
 
 export async function findUserByEmail(email: string) {
